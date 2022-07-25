@@ -14,9 +14,7 @@ pipeline {
     stages {
         stage("compl code") {
             steps {
-                echo " ============== start comp =================="
-                sh 'pip3 install pyinstaller'
-                sh 'pip3 install pathlib'
+                echo " ============== start comp =================="              
                 sh 'python3 -m PyInstaller --onefile ./nsd_cli.py'
                 }
         }
