@@ -1,0 +1,38 @@
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent {
+     node {
+      label 'master' 
+      }
+    triggers { pollSCM('* * * * *') }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("compl code") {
+            steps {
+                echo " ============== start comp =================="
+                sh 'python3 -m PyInstaller --onefile ./nsd_cli.py'
+                }
+            }
+        }
+        stage("ls dir") {
+            steps {
+            echo " ============== ls dir =============="
+            sh 'ls -la'
+            sh 'tree'
+            }
+        }
+        stage("test") {
+            steps {
+            echo " ============== run and watch out =============="
+            sh 'dist/*'
+            }
+        }
+        
+    
+    }
+    
+}
