@@ -17,8 +17,8 @@ pipeline {
                 echo " ============== start comp =================="
                 sh 'python3 -m PyInstaller --onefile ./nsd_cli.py'
                 }
-            }
         }
+        
         stage("ls dir") {
             steps {
             echo " ============== ls dir =============="
@@ -33,4 +33,4 @@ pipeline {
             }
         }    
     } 
-} 
+}
