@@ -31,7 +31,6 @@ pipeline {
             echo " ============== run and watch out =============="
             sh 'dist/*'
             }
-       }    
-   } 
- }
-}
+        }    
+    } 
+} 
