@@ -1,8 +1,8 @@
+#!groovy
 properties([disableConcurrentBuilds()])
 
 pipeline {
     agent {
-     node {
       label 'master' 
       }
     triggers { pollSCM('* * * * *') }
