@@ -13,7 +13,7 @@ pipeline {
     }
     stages {
         stage("make docker images") {
-            steps {i
+            steps {
                 echo " ============== docker build images  =================="              
                 sh 'docker build -t build_py:${BUILD_NUMBER} .'
                 }
