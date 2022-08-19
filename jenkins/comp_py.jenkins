@@ -1,0 +1,36 @@
+#!groovy
+// Run docker build
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent { 
+        label 'master'
+        }
+    triggers { pollSCM('* * * * *') }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("make docker images") {
+            steps {i
+                echo " ============== docker build images  =================="              
+                sh 'docker build -t build_py:${BUILD_NUMBER} .'
+                }
+        }
+        
+        stage("buil py in docker") {
+            steps {
+            echo " ============== build py in docker  =============="
+            sh 'docker run --rm -v ${WORKSPACE}/result:/app/dist build_py:${BUILD_NUMBER}'
+            sh 'tree'
+            }
+        }
+        stage("del images") {
+            steps {
+            echo " ============== del images  =============="
+            sh 'docker rmi build_py:${BUILD_NUMBER}'
+            }
+        }    
+    } 
+}
