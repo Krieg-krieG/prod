@@ -52,3 +52,5 @@ def telo(in_file, out_file, win_len):
             print('ошибка! Использую --help')
 if __name__ == '__main__':
     telo()
+    
+    
